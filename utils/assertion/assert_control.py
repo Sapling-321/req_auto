@@ -25,7 +25,7 @@ class Assert:
         self.assert_data = ast.literal_eval(cache_regular(str(assert_data)))
         self.functions_mapping = load_module_functions(assert_type)
 
-    @staticmethod
+    @staticmethod   # 静态方法修饰器 在不创建类实例的情况下调用方法
     def _check_params(
             response_data: Text,
             sql_data: Union[Dict, None]) -> bool:
@@ -36,8 +36,8 @@ class Assert:
         :return:
         """
         if (response_data and sql_data) is not False:
-            if not isinstance(sql_data, dict):
-                raise ValueError(
+            if not isinstance(sql_data, dict):  # 如果sql_data的数据类型不是dict
+                raise ValueError(   # raise：手动抛出异常
                     "断言失败，response_data、sql_data的数据类型必须要是字典类型，"
                     "请检查接口对应的数据是否正确\n"
                     f"sql_data: {sql_data}, 数据类型: {type(sql_data)}\n"

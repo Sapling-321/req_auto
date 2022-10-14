@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-# @Time   : 2022/3/29 14:57
-# @Author : 余少琪
 描述: 发送邮件
 """
 
@@ -28,7 +26,7 @@ class SendEmail:
         @param content: 发送内容
         @return:
         """
-        user = "余少琪" + "<" + config.email.send_user + ">"
+        user = "qkg" + "<" + config.email.send_user + ">"
         message = MIMEText(content, _subtype='plain', _charset='utf-8')
         message['Subject'] = sub
         message['From'] = user

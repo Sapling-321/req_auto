@@ -1,0 +1,32 @@
+# 公共参数
+case_common:
+  allureEpic: 小白商城接口
+  allureFeature: 个人信息模块
+  allureStory: 个人信息接口
+
+get_xiaobai_user_info_01:
+    host: ${{host()}}
+    url: /api/user
+    method: GET
+    detail: 正常获取个人身份信息
+    headers:
+      Content-Type: application/json; charset=utf-8
+      # 这里token的值，写的是存入缓存的名称 $cache{login_token}
+      Authori-zation: Bearer $cache{login_token}
+    requestType: data
+    is_run:
+    data:
+    dependence_case: False
+    dependence_case_data:
+    assert:
+      errorCode:
+        jsonpath: $.status
+        type: ==
+        value: 200
+        AssertType:
+      nickname:
+        jsonpath: $.data.nickname
+        type: ==
+        value: 'test_xiaobai'
+        AssertType:
+    sql:

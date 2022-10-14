@@ -10,30 +10,32 @@ login_xiaobai_01:
     method: POST
     detail: 正常登录
     headers:
-#     Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data; GET请求：params或data,POST请求：json
+     Content-Type: application/json; charset=utf-8
+# 请求的数据，是 params 还是 json、或者file、data; GET请求：params或data,POST请求：json
     requestType: json
-    # 是否执行，空或者 true 都会执行
+# 是否执行，空或者 true 都会执行
     is_run:
+# 接口请求的参数
     data:
-      username: '13333333333'
+      account: '13333333333'
       password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
+# 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
+# 依赖的数据
     dependence_case_data:
+# 接口断言数据
     assert:
-      # 断言接口状态码
+    # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: 0
+        value: 200
         AssertType:
-      # 断言接口返回的username
-      username:
-        jsonpath: $.data.username
+    # 断言接口返回的msg
+      msg:
+        jsonpath: $.msg
         type: ==
-        value: '13333333333'
+        value: "登录成功"
         AssertType:
     sql:
 
@@ -44,29 +46,23 @@ login_xiaobai_02:
     detail: 输入错误的密码
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
-    requestType: data
-    # 是否执行，空或者 true 都会执行
+    requestType: json
     is_run:
     data:
-      username: '13333333333'
-      password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
+      account: '13333333333'
+      password: '123456'
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "账号或密码错误"
         AssertType:
     sql:
 
@@ -77,29 +73,23 @@ login_xiaobai_03:
     detail: 登录密码为空
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
-    requestType: data
-    # 是否执行，空或者 true 都会执行
+    requestType: json
     is_run:
     data:
-      username: '13333333333'
+      account: '13333333333'
       password:
-      # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "请输入账号和密码"
         AssertType:
     sql:
 
@@ -110,29 +100,23 @@ login_xiaobai_04:
     detail: 输入非1开头的手机号码
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
-    requestType: data
-    # 是否执行，空或者 true 都会执行
+    requestType: json
     is_run:
     data:
-      username: '28800000001'
+      account: '28800000001'
       password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "账号或密码错误"
         AssertType:
     sql:
 
@@ -143,29 +127,23 @@ login_xiaobai_05:
     detail: 输入手机号码小于11位
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
-    # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      username: '1880000000'
+      account: '1880000000'
       password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "请输入账号和密码"
         AssertType:
     sql:
 
@@ -176,29 +154,23 @@ login_xiaobai_06:
     detail: 输入手机号码大于于11位
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
-    # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      username: '18800000000'
+      account: '133333333333'
       password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "请输入账号和密码"
         AssertType:
     sql:
 
@@ -209,29 +181,23 @@ login_xiaobai_07:
     detail: 手机号码为空
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
-    # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      username:
+      account:
       password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "请输入账号和密码"
         AssertType:
     sql:
 
@@ -242,28 +208,22 @@ login_xiaobai_08:
     detail: 手机号码首位包含空格
     headers:
       Content-Type: application/json; charset=utf-8
-    # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
-    # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      username: ' 18867507063 '
+      account: ' 18867507063 '
       password: 'xiaobai'
-      # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
-        # 依赖的数据
     dependence_case_data:
     assert:
-      # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.status
         type: ==
-        value: -1
+        value: 400
         AssertType:
-      # 断言接口返回的username
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.msg
         type: ==
-        value: "账号密码不匹配！"
+        value: "请输入账号和密码"
         AssertType:
     sql:

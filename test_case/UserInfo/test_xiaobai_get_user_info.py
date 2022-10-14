@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2022-08-17 10:12:54
+# @Time   : 2022-10-13 16:53:54
 
 
 import allure
@@ -12,18 +12,18 @@ from utils.read_files_tools.regular_control import regular
 from utils.requests_tool.teardown_control import TearDownHandler
 
 
-case_id = ['collect_addtool_01', 'collect_addtool_02']
+case_id = ['get_xiaobai_user_info_01']
 TestData = GetTestCase.case_data(case_id)
 re_data = regular(str(TestData))
 
 
-@allure.epic("开发平台接口")
-@allure.feature("收藏模块")
-class TestCollectAddtool:
+@allure.epic("小白商城接口")
+@allure.feature("个人信息模块")
+class TestGetUserInfo:
 
-    @allure.story("收藏网址接口")
+    @allure.story("个人信息接口")
     @pytest.mark.parametrize('in_data', eval(re_data), ids=[i['detail'] for i in TestData])
-    def test_collect_addtool(self, in_data, case_skip):
+    def test_get_user_info(self, in_data, case_skip):
         """
         :param :
         :return:
@@ -35,4 +35,4 @@ class TestCollectAddtool:
 
 
 if __name__ == '__main__':
-    pytest.main(['test_collect_addtool.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])
+    pytest.main(['test_xiaobai_get_user_info.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])

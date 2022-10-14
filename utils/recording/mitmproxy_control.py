@@ -167,7 +167,7 @@ class Counter:
         for i in self.url:
             # 这里主要是判断，如果我们conf.py中有配置这个域名，则用例中展示 ”${{host}}“，动态获取用例host
             # 大家可以在这里改成自己公司的host地址
-            if 'https://www.wanandroid.com' in url:
+            if 'http://192.168.0.240:8005' in url:
                 host = '${{host}}'
             elif i in url:
                 host = i
@@ -221,5 +221,5 @@ class Counter:
 
 
 addons = [
-    Counter(["https://www.wanandroid.com"])
+    Counter(["http://192.168.0.240:8005"])
     ]

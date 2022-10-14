@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2022/3/30 14:12
-# @Author : 余少琪
 import pytest
 import time
 import allure
@@ -25,28 +23,31 @@ def clear_report():
 @pytest.fixture(scope="session", autouse=True)
 def work_login_init():
     """
-    获取登录的cookie
+    获取登录的token,cookie
     :return:
     """
 
-    url = "https://www.wanandroid.com/user/login"
+    url = "http://192.168.0.240:8005/api//login"
     data = {
-        "username": 18800000001,
-        "password": 123456
+        "account": "13333333333",
+        "password": "xiaobai"
     }
-    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+    headers = {"Content-Type": "application/json; charset=utf-8"}
     # 请求登录接口
 
-    res = requests.post(url=url, data=data, verify=True, headers=headers)
-    response_cookie = res.cookies
+    # res = requests.post(url=url, json=data, verify=True, headers=headers)
+    res = requests.post(url=url, json=data, headers=headers, verify=True).json()
+    response_token = res['data']['token']
+    CacheHandler.update_cache(cache_name='login_token', value=response_token)
 
-    cookies = ''
-    for k, v in response_cookie.items():
-        _cookie = k + "=" + v + ";"
-        # 拿到登录的cookie内容，cookie拿到的是字典类型，转换成对应的格式
-        cookies += _cookie
-        # 将登录接口中的cookie写入缓存中，其中login_cookie是缓存名称
-    CacheHandler.update_cache(cache_name='login_cookie', value=cookies)
+    # response_cookie = res.cookies
+    # cookies = ''
+    # for k, v in response_cookie.items():
+    #     _cookie = k + "=" + v + ";"
+    #     # 拿到登录的cookie内容，cookie拿到的是字典类型，转换成对应的格式
+    #     cookies += _cookie
+    #     # 将登录接口中的cookie写入缓存中，其中login_cookie是缓存名称
+    # CacheHandler.update_cache(cache_name='login_cookie', value=cookies)
 
 
 def pytest_collection_modifyitems(items):
